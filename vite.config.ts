@@ -9,6 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
+  base: "/Galbi_Creator/", // Add this line to set the correct base path
   plugins: [
     react(),
     runtimeErrorOverlay(),
