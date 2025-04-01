@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+  
+  /* Improve heading styles */
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
+  
+  /* Improve accessibility for focus elements */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}
+
+@layer components {
+  /* Acadewise branded components */
+  .acadewise-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-500;
+  }
+  
+  .acadewise-card {
+    @apply rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md;
+  }
+  
+  .acadewise-input {
+    @apply border-gray-300 focus:border-purple-500 focus:ring focus:ring-purple-200 focus:ring-opacity-50;
+  }
+  
+  /* Animation classes */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  /* Image enhancement for artwork display */
+  .artwork-display {
+    @apply rounded-lg overflow-hidden relative;
+  }
+  
+  .artwork-display img {
+    @apply w-full h-full object-cover transition duration-500;
+  }
+  
+  .artwork-display:hover img {
+    @apply transform scale-105;
+  }
+}
+
+/* For improving web vitals performance */
+@layer utilities {
+  .content-visibility-auto {
+    content-visibility: auto;
+  }
+}
