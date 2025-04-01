@@ -1,6 +1,6 @@
 name: Deploy Galbi Creator
 
-on:
+on: 
   push:
     branches: [ main ]
   pull_request:
