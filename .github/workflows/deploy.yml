@@ -29,20 +29,22 @@ jobs:
       run: npm ci
     
     - name: Build project
+      env:
+        VITE_BASE_PATH: "/Galbi_Creator/"  # Ensures correct routing
       run: npm run build
-    
-    - name: Move build output to public directory
+
+    - name: Move build output to the root for GitHub Pages
       run: |
         mkdir -p public
-        mv dist/* public/
+        mv dist/* public/  # Move build files inside public directory
+        mv public/index.html .  # Ensure index.html is at the root
 
-    - name: Ensure GitHub Pages compatibility
-      run: touch public/.nojekyll  # Prevents Jekyll processing issues
+    - name: Create .nojekyll file (important for GitHub Pages)
+      run: touch public/.nojekyll
 
     - name: Deploy to GitHub Pages
       if: success() && github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v3
       with:
-        personal_token: ${{ secrets.secret }}  # Use your GitHub token
-        publish_dir: ./public   # Set correct directory for GitHub Pages
-        keep_files: false  # Optional: Clears previous files before deploying
+        personal_token: ${{ secrets.secret }}  # Using your custom secret
+        publish_dir: ./public
