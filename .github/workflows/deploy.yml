@@ -33,11 +33,14 @@ jobs:
         VITE_BASE_PATH: "/Galbi_Creator/"  # Ensures correct routing
       run: npm run build
 
-    - name: Move build output to the root for GitHub Pages
+    - name: Check if build was successful
+      run: ls -R dist  # Debugging step to see if `index.html` exists
+
+    - name: Move build output to correct location
       run: |
         mkdir -p public
-        mv dist/* public/  # Move build files inside public directory
-        mv public/index.html .  # Ensure index.html is at the root
+        cp -r dist/* public/  # Copy everything instead of moving
+        ls -R public  # Debugging step to verify contents
 
     - name: Create .nojekyll file (important for GitHub Pages)
       run: touch public/.nojekyll
@@ -46,5 +49,5 @@ jobs:
       if: success() && github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v3
       with:
-        personal_token: ${{ secrets.secret }}  # Using your custom secret
+        personal_token: ${{ secrets.secret }}
         publish_dir: ./public
